@@ -8,7 +8,7 @@ import * as S from "./Navbar.Styled";
 export default function Navbar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const token    = useAppSelector(selectToken);
+  const token = useAppSelector(selectToken);
   const username = useAppSelector(selectUsername);
   const [open, setOpen] = useState(false);
 
@@ -23,11 +23,10 @@ export default function Navbar() {
       <S.Left>
         <S.Logo to="/">SmartSoft</S.Logo>
 
-        <S.Hamburger onClick={() => setOpen(o => !o)}>
+        <S.Hamburger onClick={() => setOpen((o) => !o)}>
           {open ? <FiX /> : <FiMenu />}
         </S.Hamburger>
 
-        {/* Add or remove the "open" class to control mobile visibility */}
         <S.Menu className={open ? "open" : ""}>
           {!token ? (
             <>
@@ -46,9 +45,7 @@ export default function Navbar() {
               <S.NavLink to="/countries" onClick={() => setOpen(false)}>
                 Countries
               </S.NavLink>
-              <S.LogoutMenuItem onClick={handleLogout}>
-                Logout
-              </S.LogoutMenuItem>
+              <S.LogoutMenuItem onClick={handleLogout}>Logout</S.LogoutMenuItem>
             </>
           )}
         </S.Menu>

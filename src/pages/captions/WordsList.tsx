@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./WordList.Styled";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import {
@@ -12,33 +12,28 @@ import { editWord, addWord, deleteWord } from "../../api/client";
 
 export default function WordsList() {
   const dispatch = useAppDispatch();
-  const words    = useAppSelector(selectWords);
-  const loading  = useAppSelector(selectWordsLoading);
-  const error    = useAppSelector(selectWordsError);
-
-  // pagination
+  const words = useAppSelector(selectWords);
+  const loading = useAppSelector(selectWordsLoading);
+  const error = useAppSelector(selectWordsError);
   const itemsPerPage = 15;
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(words.length / itemsPerPage);
-  const pageRows   = words.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
-  // edit state
-  const [editWordData, setEditWordData] = useState<null | typeof words[0]>(null);
-  const [editForm, setEditForm]         = useState({ national: "", foreign: "" });
-
-  // add state
+  const pageRows = words.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+  const [editWordData, setEditWordData] = useState<null | (typeof words)[0]>(
+    null
+  );
+  const [editForm, setEditForm] = useState({ national: "", foreign: "" });
   const [isAddOpen, setAddOpen] = useState(false);
-  const [addForm,   setAddForm] = useState({ national: "", foreign: "" });
-
-  // delete state
-  const [deleteWordData, setDeleteWordData] = useState<null | typeof words[0]>(null);
+  const [addForm, setAddForm] = useState({ national: "", foreign: "" });
+  const [deleteWordData, setDeleteWordData] = useState<
+    null | (typeof words)[0]
+  >(null);
 
   useEffect(() => {
     dispatch(fetchWords());
   }, [dispatch]);
 
-  // ── Edit handlers
-  const openEdit = (w: typeof words[0]) => {
+  const openEdit = (w: (typeof words)[0]) => {
     setEditWordData(w);
     setEditForm({ national: w.national, foreign: w.foreign });
   };
@@ -50,7 +45,6 @@ export default function WordsList() {
     closeEdit();
   };
 
-  // ── Add handlers
   const openAdd = () => {
     setAddForm({ national: "", foreign: "" });
     setAddOpen(true);
@@ -62,8 +56,7 @@ export default function WordsList() {
     closeAdd();
   };
 
-  // ── Delete handlers
-  const openDelete = (w: typeof words[0]) => setDeleteWordData(w);
+  const openDelete = (w: (typeof words)[0]) => setDeleteWordData(w);
   const closeDelete = () => setDeleteWordData(null);
   const handleDeleteConfirm = async () => {
     if (!deleteWordData) return;
@@ -132,7 +125,6 @@ export default function WordsList() {
           </S.Table>
         </S.TableWrapper>
 
-        {/* pagination */}
         <S.PaginationContainer>
           <S.PageButton
             disabled={page <= 1}
@@ -152,7 +144,6 @@ export default function WordsList() {
         </S.PaginationContainer>
       </S.Card>
 
-      {/* Edit Modal */}
       {editWordData && (
         <S.Overlay>
           <S.Modal>
@@ -161,7 +152,7 @@ export default function WordsList() {
               <S.ModalLabel>National</S.ModalLabel>
               <S.ModalInput
                 value={editForm.national}
-                onChange={(e: { target: { value: any; }; }) =>
+                onChange={(e: { target: { value: any } }) =>
                   setEditForm((f) => ({ ...f, national: e.target.value }))
                 }
               />
@@ -170,7 +161,7 @@ export default function WordsList() {
               <S.ModalLabel>Foreign</S.ModalLabel>
               <S.ModalInput
                 value={editForm.foreign}
-                onChange={(e: { target: { value: any; }; }) =>
+                onChange={(e: { target: { value: any } }) =>
                   setEditForm((f) => ({ ...f, foreign: e.target.value }))
                 }
               />
@@ -183,7 +174,6 @@ export default function WordsList() {
         </S.Overlay>
       )}
 
-      {/* Add Modal */}
       {isAddOpen && (
         <S.Overlay>
           <S.Modal>
@@ -192,7 +182,7 @@ export default function WordsList() {
               <S.ModalLabel>National</S.ModalLabel>
               <S.ModalInput
                 value={addForm.national}
-                onChange={(e: { target: { value: any; }; }) =>
+                onChange={(e: { target: { value: any } }) =>
                   setAddForm((f) => ({ ...f, national: e.target.value }))
                 }
               />
@@ -201,7 +191,7 @@ export default function WordsList() {
               <S.ModalLabel>Foreign</S.ModalLabel>
               <S.ModalInput
                 value={addForm.foreign}
-                onChange={(e: { target: { value: any; }; }) =>
+                onChange={(e: { target: { value: any } }) =>
                   setAddForm((f) => ({ ...f, foreign: e.target.value }))
                 }
               />
@@ -214,7 +204,6 @@ export default function WordsList() {
         </S.Overlay>
       )}
 
-      {/* Delete Confirmation Modal */}
       {deleteWordData && (
         <S.Overlay>
           <S.Modal>
@@ -225,9 +214,9 @@ export default function WordsList() {
             </p>
             <S.ModalActions>
               <S.CancelButton onClick={closeDelete}>Cancel</S.CancelButton>
-              <S.DeleteIconButton onClick={handleDeleteConfirm}>
+              <S.deleteButton onClick={handleDeleteConfirm}>
                 Delete
-              </S.DeleteIconButton>
+              </S.deleteButton>
             </S.ModalActions>
           </S.Modal>
         </S.Overlay>

@@ -46,7 +46,6 @@ export const Menu = styled.nav`
   align-items: center;
   gap: 1.5rem;
 
-  /* Mobile: hidden by default */
   @media (max-width: 768px) {
     display: none;
     flex-direction: column;
@@ -60,7 +59,6 @@ export const Menu = styled.nav`
     z-index: 10;
   }
 
-  /* When .open is added, mobile shows */
   &.open {
     @media (max-width: 768px) {
       display: flex;

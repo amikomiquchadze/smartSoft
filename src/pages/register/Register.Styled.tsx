@@ -1,17 +1,26 @@
 import styled from "@emotion/styled";
-
-// Full‐screen blue→purple gradient background, no horizontal scroll
+import { Colors } from ".././/../styles/Colors";
+const {
+  lighgray,
+  red,
+  lightblue,
+  gradientone,
+  darkblue,
+  gradienttwo,
+  mainbg,
+  mainplaceholder,
+  disabled,
+} = Colors;
 export const Container = styled.div`
   overflow-x: hidden;
-  min-height: 82vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, ${gradientone} 0%, ${gradienttwo} 100%);
   padding: 1rem;
 `;
 
-// White card with rounded corners and drop shadow
 export const Card = styled.div`
   position: relative;
   background: #fff;
@@ -23,13 +32,11 @@ export const Card = styled.div`
   text-align: center;
 `;
 
-// Title above form
 export const Title = styled.h2`
   margin-bottom: 2rem;
-  color: #111827;
+  color: ${darkblue};
 `;
 
-// Stack inputs and button with consistent gap
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -40,31 +47,30 @@ export const Label = styled.label`
   position: flex-start;
   margin-bottom: -10px;
   font-size: 0.875rem;
-  color: #4b5563;
+  color: ${lighgray};
 `;
 export const Input = styled.input<{ hasError?: boolean }>`
   width: 90%;
   padding: 0.75rem 1rem;
-  border: 1px solid ${(p: { hasError: any; }) => (p.hasError ? "#ef4444" : "#d1d5db")};
+  border: 1px solid
+    ${(p: { hasError: any }) => (p.hasError ? "#ef4444" : "#d1d5db")};
   border-radius: 0.75rem;
   font-size: 1rem;
-  background: #f9fafb;
+  background: ${mainbg};
   &::placeholder {
-    color: #9ca3af;
+    color: ${mainplaceholder};
   }
   &:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: ${gradientone};
     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
   }
 `;
 
-
-// Pill‐shaped submit button with hover lift
 export const Button = styled.button`
   margin-top: 1rem;
   padding: 0.75rem;
-  background: #667eea;
+  background: ${gradientone};
   color: #fff;
   border: none;
   border-radius: 0.75rem;
@@ -74,26 +80,24 @@ export const Button = styled.button`
   transition: background 0.2s, transform 0.1s;
 
   &:hover:not(:disabled) {
-    background: #5a67d8;
+    background: ${lightblue};
     transform: translateY(-1px);
   }
   &:disabled {
-    background: #cbd5e0;
+    background: ${disabled};
     cursor: not-allowed;
   }
 `;
 
-// Inline error message
 export const ErrorText = styled.p`
   margin: 0;
-  color: #ef4444;
+  color: ${red};
   font-size: 0.875rem;
   text-align: left;
 `;
 
-// Success or error message below form
 export const Message = styled.p<{ success?: boolean }>`
   margin-top: 1rem;
-  color: ${(p: { success: any; }) => (p.success ? "#10b981" : "#ef4444")};
+  color: ${(p: { success: any }) => (p.success ? "#10b981" : "#ef4444")};
   font-weight: 600;
 `;

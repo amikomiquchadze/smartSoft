@@ -1,9 +1,21 @@
 import styled from "@emotion/styled";
+import { Colors } from ".././/../styles/Colors";
+const {
+  white,
+  bggrey,
+  darkwhite,
+  blue,
+  lighgray,
+  lightblack,
+  blueandgray,
+  whitepurple,
+  trbg,
+} = Colors;
 
 export const Container = styled.div`
   min-height: 100vh;
   padding: 2rem 1rem;
-  background: #f3f4f6;
+  background: ${bggrey};
   display: flex;
   justify-content: center;
 
@@ -13,11 +25,11 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
-  background: #ffffff;
+  background: ${white};
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   border-radius: 1rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   padding: 2.5rem;
 
   @media (max-width: 600px) {
@@ -44,7 +56,7 @@ export const Title = styled.h2`
   margin: 0;
   font-size: 1.75rem;
   font-weight: 600;
-  color: #111827;
+  color: ${lightblack};
 
   @media (max-width: 480px) {
     font-size: 1.5rem;
@@ -56,7 +68,7 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  color: #374151;
+  color: ${blueandgray};
 
   input {
     width: 1rem;
@@ -69,7 +81,7 @@ export const FilterLabel = styled.label`
   align-items: center;
   gap: 0.25rem;
   font-size: 0.9rem;
-  color: #374151;
+  color: ${blueandgray};
 
   select {
     margin-left: 0.5rem;
@@ -82,7 +94,7 @@ export const Select = styled.select`
   border-radius: 0.5rem;
   background: #f9fafb;
   font-size: 0.875rem;
-  color: #374151;
+  color: ${blueandgray};
 
   @media (max-width: 480px) {
     font-size: 0.85rem;
@@ -93,7 +105,7 @@ export const TableWrapper = styled.div`
   overflow-x: auto;
   border-radius: 0.75rem;
   box-shadow: inset 0 0 0 1px #e5e7eb;
-  background: #ffffff;
+  background: ${white};
 `;
 
 export const Table = styled.table`
@@ -103,12 +115,14 @@ export const Table = styled.table`
   @media (max-width: 770px) {
     border: 0;
 
-    thead { display: none; }
+    thead {
+      display: none;
+    }
     tr {
       display: block;
       margin-bottom: 1rem;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border-radius: 0.5rem;
       padding: 0.75rem 1rem;
     }
@@ -121,7 +135,7 @@ export const Table = styled.table`
       &::before {
         content: attr(data-label);
         font-weight: 600;
-        color: #4b5563;
+        color: ${lighgray};
         margin-right: 1rem;
       }
     }
@@ -133,17 +147,17 @@ export const Th = styled.th`
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #6b7280;
+  color: ${whitepurple};
   border-bottom: 1px solid #e5e7eb;
-  background: #ffffff;
+  background: ${white};
 `;
 
 export const Tr = styled.tr`
   &:nth-of-type(even) {
-    background: #fafafc;
+    background: ${trbg};
   }
   &:hover {
-    background: #f5f5ff;
+    background: ${darkwhite};
   }
 `;
 
@@ -175,23 +189,23 @@ export const PaginationContainer = styled.div`
 
 export const PageButton = styled.button<{ disabled?: boolean }>`
   padding: 0.5rem 1rem;
-  background: ${(p: { disabled: any; }) => (p.disabled ? "#e5e5e5" : "#4f46e5")};
-  color: ${(p: { disabled: any; }) => (p.disabled ? "#9ca3af" : "#ffffff")};
+  background: ${(p: { disabled: any }) => (p.disabled ? "#e5e5e5" : "#4f46e5")};
+  color: ${(p: { disabled: any }) => (p.disabled ? "#9ca3af" : "#ffffff")};
   border: none;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
-  cursor: ${(p: { disabled: any; }) => (p.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(p: { disabled: any }) => (p.disabled ? "not-allowed" : "pointer")};
   transition: background 0.2s;
 
   &:hover:not(:disabled) {
-    background: #4338ca;
+    background: ${blue};
   }
 `;
 
 export const PageIndicator = styled.span`
   font-size: 0.875rem;
-  color: #4b5563;
+  color: ${lighgray};
 
   @media (max-width: 480px) {
     font-size: 0.85rem;
@@ -201,5 +215,6 @@ export const PageIndicator = styled.span`
 export const Message = styled.p<{ success?: boolean }>`
   text-align: center;
   margin-top: 1.5rem;
-  color: ${(p: { success: boolean; }) => (p.success === false ? "#ef4444" : "#6b7280")};
+  color: ${(p: { success: boolean }) =>
+    p.success === false ? "#ef4444" : "#6b7280"};
 `;

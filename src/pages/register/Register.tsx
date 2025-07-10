@@ -1,4 +1,3 @@
-// src/pages/register/Register.tsx
 
 import React, { useState } from "react";
 import { registerUser, type RegisterForm } from "../../api/client";
@@ -67,7 +66,6 @@ export default function Register() {
       <S.Card>
         <S.Title>Create an Account</S.Title>
         <S.Form onSubmit={handleSubmit} noValidate>
-          {/* Username Field */}
           <S.Label htmlFor="username">UserName</S.Label>
           <S.Input
             id="username"
@@ -80,7 +78,6 @@ export default function Register() {
           />
           {errors.username && <S.ErrorText>{errors.username}</S.ErrorText>}
 
-          {/* Password Field */}
           <S.Label htmlFor="password">Password</S.Label>
           <S.Input
             id="password"
@@ -93,7 +90,7 @@ export default function Register() {
           />
           {errors.password && <S.ErrorText>{errors.password}</S.ErrorText>}
 
-          {/* Confirm Password Field */}
+        
           <S.Label htmlFor="confirm_password">Confirm Password</S.Label>
           <S.Input
             id="confirm_password"

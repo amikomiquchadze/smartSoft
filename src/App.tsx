@@ -1,4 +1,4 @@
-// src/App.tsx
+import "./index.css"
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./pages/navbar/Navbar";
 import Login    from "./pages/login/Login";
@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/login"    element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* protected */}
+       
         <Route
           path="/words"
           element={token ? <WordsList /> : <Navigate to="/login" replace />}
@@ -29,7 +29,7 @@ export default function App() {
           element={token ? <Countries /> : <Navigate to="/login" replace />}
         />
 
-        {/* catch-all */}
+        
         <Route
           path="*"
           element={<Navigate to={token ? "/words" : "/login"} replace />}

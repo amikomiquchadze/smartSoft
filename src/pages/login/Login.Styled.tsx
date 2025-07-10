@@ -1,17 +1,33 @@
-
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
+import { Colors } from ".././/../styles/Colors";
+const {
+  lighgray,
+  red,
+  lightblue,
+  gradientone,
+  darkblue,
 
+  whitepurple,
+  gradientmain,
+  gradientmain2,
+  mainbg,
+  mainplaceholder,
+  disabled,
+} = Colors;
 
 export const Container = styled.div`
-  min-height: 82vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top left, #a8c0ff, #3f2b96);
+  background: radial-gradient(
+    circle at top left,
+    ${gradientmain},
+    ${gradientmain2}
+  );
   padding: 1rem;
 `;
-
 
 export const Card = styled.div`
   position: relative;
@@ -27,21 +43,19 @@ export const Card = styled.div`
 export const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: ${gradientone};
   margin-bottom: 1rem;
-  /* if you have an SVG or icon component, drop it in here */
 `;
 
 export const Title = styled.h2`
- 
   margin-bottom: 1rem;
-  color: #111827;
+  color: ${darkblue};
   font-size: 1.5rem;
 `;
 
 export const Subtitle = styled.p`
   margin: 0 0 2rem;
-  color: #6b7280;
+  color: ${whitepurple};
   font-size: 0.875rem;
 `;
 
@@ -59,22 +73,23 @@ export const Label = styled.label`
   display: block;
   margin-bottom: 0.25rem;
   font-size: 0.875rem;
-  color: #4b5563;
+  color: ${lighgray};
 `;
 
 export const Input = styled.input<{ hasError?: boolean }>`
   width: 90%;
   padding: 0.75rem 1rem;
-  border: 1px solid ${(p: { hasError: any; }) => (p.hasError ? "#ef4444" : "#d1d5db")};
+  border: 1px solid
+    ${(p: { hasError: any }) => (p.hasError ? "#ef4444" : "#d1d5db")};
   border-radius: 0.75rem;
   font-size: 1rem;
-  background: #f9fafb;
+  background: ${mainbg};
   &::placeholder {
-    color: #9ca3af;
+    color: ${mainplaceholder};
   }
   &:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: ${gradientone};
     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
   }
 `;
@@ -82,7 +97,7 @@ export const Input = styled.input<{ hasError?: boolean }>`
 export const Button = styled.button`
   margin-top: 1rem;
   padding: 0.75rem;
-  background: #667eea;
+  background: ${gradientone};
   color: #fff;
   border: none;
   border-radius: 0.75rem;
@@ -91,18 +106,18 @@ export const Button = styled.button`
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
   &:hover:not(:disabled) {
-    background: #5a67d8;
+    background: ${lightblue};
     transform: translateY(-1px);
   }
   &:disabled {
-    background: #cbd5e0;
+    background: ${disabled};
     cursor: not-allowed;
   }
 `;
 
 export const ErrorText = styled.p`
   margin: 0.5rem 0 0;
-  color: #ef4444;
+  color: ${red};
   font-size: 0.875rem;
   text-align: left;
 `;
@@ -110,11 +125,11 @@ export const ErrorText = styled.p`
 export const Footer = styled.p`
   margin-top: 1.5rem;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: ${whitepurple};
 `;
 
 export const FooterLink = styled(Link)`
-  color: #667eea;
+  color: ${gradientone};
   text-decoration: none;
   font-weight: 600;
   &:hover {

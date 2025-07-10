@@ -1,6 +1,5 @@
-// src/pages/Login.tsx
 import React, { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   login,
   selectAuthError,
@@ -9,17 +8,16 @@ import {
 } from "../../store/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import type { LoginForm } from "../../api/client";
-import * as S from "./Login.Styled"
-
+import * as S from "./Login.Styled";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const token    = useAppSelector(selectToken);
-  const loading  = useAppSelector(selectAuthLoading);
-  const error    = useAppSelector(selectAuthError);
+  const token = useAppSelector(selectToken);
+  const loading = useAppSelector(selectAuthLoading);
+  const error = useAppSelector(selectAuthError);
 
-  const [form, setForm]     = useState<LoginForm>({ username: "", password: "" });
+  const [form, setForm] = useState<LoginForm>({ username: "", password: "" });
   const [errors, setErrors] = useState<Partial<LoginForm>>({});
 
   useEffect(() => {
@@ -32,15 +30,15 @@ export default function Login() {
   const validateForm = () => {
     const newErrors: Partial<LoginForm> = {};
     if (!form.username.trim()) newErrors.username = "Email is required.";
-    if (!form.password)        newErrors.password = "Password is required.";
+    if (!form.password) newErrors.password = "Password is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm(f => ({ ...f, [name]: value }));
-    setErrors(e => ({ ...e, [name]: undefined }));
+    setForm((f) => ({ ...f, [name]: value }));
+    setErrors((e) => ({ ...e, [name]: undefined }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -91,7 +89,8 @@ export default function Login() {
         </S.Form>
 
         <S.Footer>
-          Don’t have an account? <S.FooterLink to="/register">Sign up</S.FooterLink>
+          Don’t have an account?{" "}
+          <S.FooterLink to="/register">Sign up</S.FooterLink>
         </S.Footer>
       </S.Card>
     </S.Container>

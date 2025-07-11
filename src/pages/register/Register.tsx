@@ -1,7 +1,8 @@
 
 import React, { useState } from "react";
-import { registerUser, type RegisterForm } from "../../api/client";
+import {  type RegisterForm } from "../../api/model/payloadInterfaces";
 import * as S from "./Register.Styled";
+import api from "../../api";
 
 export default function Register() {
   const [form, setForm] = useState<RegisterForm>({
@@ -42,7 +43,7 @@ export default function Register() {
     setSubmitting(true);
     setMessage(null);
     try {
-      const { data } = await registerUser(form);
+      const { data } = await api.client.registerUser(form);
       if ((data as any).errorMessage) {
         setMessage({ text: (data as any).errorMessage, success: false });
       } else {

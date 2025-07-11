@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import wordsReducer from "./wordsSlice";
-import apiClient from "../api/client";
+import apiClient from "../api/rest/client";
 
 export const store = configureStore({
   reducer: {

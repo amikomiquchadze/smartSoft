@@ -1,6 +1,11 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
-import { loginUser, type LoginForm } from "../api/client";
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
+import { loginUser } from "../api/rest/client";
 import type { RootState } from "./index";
+import type { LoginForm } from "../api/model/payloadInterfaces";
 
 interface AuthState {
   token: string | null;
@@ -20,17 +25,14 @@ export const login = createAsyncThunk<
   { token: string; username: string },
   LoginForm,
   { rejectValue: string }
->(
-  "auth/login",
-  async (data, { rejectWithValue }) => {
-    try {
-      const { data: res } = await loginUser(data);
-      return { token: res.token, username: data.username };
-    } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message || err.message);
-    }
+>("auth/login", async (data, { rejectWithValue }) => {
+  try {
+    const { data: res } = await loginUser(data);
+    return { token: res.token, username: data.username };
+  } catch (err: any) {
+    return rejectWithValue(err.response?.data?.message || err.message);
   }
-);
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -64,11 +66,10 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 
-// **Add this selector** so you can import it by name:
 export const selectUsername = (state: RootState) => state.auth.username;
 
-export const selectToken   = (state: RootState) => state.auth.token;
+export const selectToken = (state: RootState) => state.auth.token;
 export const selectAuthLoading = (state: RootState) => state.auth.loading;
-export const selectAuthError   = (state: RootState) => state.auth.error;
+export const selectAuthError = (state: RootState) => state.auth.error;
 
 export default authSlice.reducer;

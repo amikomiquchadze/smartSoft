@@ -39,8 +39,8 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <S.NavLink to="/words" onClick={() => setOpen(false)}>
-                Words
+              <S.NavLink to="/captions" onClick={() => setOpen(false)}>
+                Captions
               </S.NavLink>
               <S.NavLink to="/countries" onClick={() => setOpen(false)}>
                 Countries

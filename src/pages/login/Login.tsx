@@ -7,7 +7,7 @@ import {
   selectToken,
 } from "../../store/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import type { LoginForm } from "../../api/client";
+import type { LoginForm } from "../../api/model/payloadInterfaces";
 import * as S from "./Login.Styled";
 
 export default function Login() {
@@ -23,7 +23,7 @@ export default function Login() {
   useEffect(() => {
     if (token) {
       localStorage.setItem("username", form.username);
-      navigate("/words");
+      navigate("/captions");
     }
   }, [token, navigate, form.username]);
 

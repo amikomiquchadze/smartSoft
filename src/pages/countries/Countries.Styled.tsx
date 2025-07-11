@@ -3,13 +3,13 @@ import { Colors } from ".././/../styles/Colors";
 const {
   white,
   bggrey,
-  darkwhite,
   blue,
   lighgray,
   lightblack,
   blueandgray,
-  whitepurple,
+  lightblue2,
   trbg,
+  disabledwhite,
 } = Colors;
 
 export const Container = styled.div`
@@ -142,38 +142,59 @@ export const Table = styled.table`
   }
 `;
 
-export const Th = styled.th`
-  text-align: left;
-  padding: 1rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: ${whitepurple};
-  border-bottom: 1px solid #e5e7eb;
-  background: ${white};
-`;
-
 export const Tr = styled.tr`
-  &:nth-of-type(even) {
-    background: ${trbg};
-  }
+  border-bottom: 1px solid #e5e7eb;
   &:hover {
-    background: ${darkwhite};
+    background: ${disabledwhite};
+  }
+
+  @media (max-width: 640px) {
+    display: block;
+    margin-bottom: 1rem;
+    background: ${trbg};
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
   }
 `;
 
 export const Td = styled.td`
-  padding: 1rem 1.5rem;
-  font-size: 0.9375rem;
-  color: #374151;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: ${blueandgray};
 
-  @media (max-width: 480px) {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.8rem;
-    border-bottom: none;
+  @media (max-width: 640px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid ${white};
+
+    &::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: #6b7280;
+      margin-right: 1rem;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
   }
 `;
 
+export const Th = styled.th`
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: ${lightblue2};
+  background: #f9fafb;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+`;
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;

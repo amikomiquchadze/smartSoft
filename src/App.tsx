@@ -3,10 +3,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./pages/navbar/Navbar";
 import Login    from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import WordsList from "./pages/captions/WordsList";
-import Countries from "./pages/countries/countries";
 import { useAppSelector } from "./store/hooks";
 import { selectToken } from "./store/authSlice";
+import CaptionList from "./pages/captions/CaptionList";
+import Countries from "./pages/countries/Countries";
 
 export default function App() {
   const token = useAppSelector(selectToken);
@@ -21,8 +21,8 @@ export default function App() {
 
        
         <Route
-          path="/words"
-          element={token ? <WordsList /> : <Navigate to="/login" replace />}
+          path="/captions"
+          element={token ? <CaptionList /> : <Navigate to="/login" replace />}
         />
         <Route
           path="/countries"
@@ -32,7 +32,7 @@ export default function App() {
         
         <Route
           path="*"
-          element={<Navigate to={token ? "/words" : "/login"} replace />}
+          element={<Navigate to={token ? "/captions" : "/login"} replace />}
         />
       </Routes>
     </>

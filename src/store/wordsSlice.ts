@@ -3,8 +3,9 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import apiClient, { type Word } from "../api/client";
+import apiClient from "../api/rest/client";
 import type { RootState } from "./index";
+import type { Word } from "../api/model/responseInterfaces";
 
 interface WordsState {
   words: Word[];

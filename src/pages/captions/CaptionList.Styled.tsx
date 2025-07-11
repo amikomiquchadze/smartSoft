@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Colors } from ".././/../styles/Colors";
+import { Colors } from "../../styles/Colors";
 const {
   lightgreen,
   green,
@@ -21,9 +21,7 @@ const {
   black,
   blueandgray,
   hover,
-  thbg,
-  trbg
-  
+  trbg,
 } = Colors;
 export const Container = styled.div`
   padding: 2rem 1rem;
@@ -57,7 +55,6 @@ export const TitleRow = styled.div`
   margin-bottom: 1.5rem;
 
   @media (max-width: 480px) {
-    flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
   }
@@ -137,38 +134,6 @@ export const Table = styled.table`
   }
 `;
 
-export const Th = styled.th`
-  text-align: left;
-  padding: 1rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: ${lightblue2};
-  border-bottom: 1px solid #e5e7eb;
-  background: ${thbg};
-`;
-
-export const Tr = styled.tr`
-  &:nth-of-type(even) {
-    background: ${trbg};#f5f5ff
-  }
-  &:hover {
-    background: ${disabledwhite};
-  }
-`;
-
-export const Td = styled.td`
-  padding: 1rem 1.5rem;
-  font-size: 0.9375rem;
-  color: ${blueandgray};
-  border-bottom: 1px solid ${white};
-
-  @media (max-width: 480px) {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.8rem;
-    border-bottom: none;
-  }
-`;
-
 export const ActionGroup = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -218,7 +183,7 @@ export const Message = styled.p<{ success?: boolean }>`
 export const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background: ${black};
+  // background: ${black};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,7 +271,7 @@ export const SaveButton = styled.button`
 
 export const CancelButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background:bggrey ;
+  background: bggrey;
   color: ${lighgray};
   border: none;
   border-radius: 9999px;
@@ -371,5 +336,59 @@ export const PageIndicator = styled.span`
 
   @media (max-width: 480px) {
     font-size: 0.85rem;
+  }
+`;
+
+export const Tr = styled.tr`
+  border-bottom: 1px solid #e5e7eb;
+  &:hover {
+    background: ${disabledwhite};
+  }
+
+  @media (max-width: 640px) {
+    display: block;
+    margin-bottom: 1rem;
+    background: ${trbg};
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+  }
+`;
+
+export const Td = styled.td`
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: ${blueandgray};
+
+  @media (max-width: 640px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid ${white};
+
+    &::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: #6b7280;
+      margin-right: 1rem;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+`;
+
+export const Th = styled.th`
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: ${lightblue2};
+  background: #f9fafb;
+
+  @media (max-width: 640px) {
+    display: none;
   }
 `;

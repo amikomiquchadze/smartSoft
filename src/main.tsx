@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
-import WordsList from "./pages/captions/WordsList";
-import Countries from "./pages/countries/countries";
+import Countries from "./pages/countries/Countries";
+import CaptionList from "./pages/captions/CaptionList";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route index element={<Navigate to="/register" replace />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-            <Route path="words" element={<WordsList />} />
+            <Route path="captions" element={<CaptionList />} />
             <Route path="/countries" element={<Countries />} />
           </Route>
         </Routes>

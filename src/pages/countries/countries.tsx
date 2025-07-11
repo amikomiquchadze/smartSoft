@@ -2,14 +2,9 @@ import { useState, useEffect, type SetStateAction } from "react";
 
 import * as S from "./Countries.Styled";
 
-import {
-  fetchCountries,
-  fetchIndependentCountries,
-  fetchByCurrency,
-  normalizeCountries,
-  type CountryRow,
-} from "../../api/countries";
-
+import type { CountryRow } from "../../api/model/responseInterfaces";
+import api from "../../api";
+import { Table } from "../shared/table/Table";
 
 export default function Countries() {
   const [rows, setRows] = useState<CountryRow[]>([]);
@@ -27,13 +22,13 @@ export default function Countries() {
     setError(null);
 
     const loader = currency
-      ? () => fetchByCurrency(currency)
+      ? () => api.countries.fetchByCurrency(currency)
       : independentOnly
-      ? fetchIndependentCountries
-      : fetchCountries;
+      ? api.countries.fetchIndependentCountries
+      : api.countries.fetchCountries;
 
     loader()
-      .then((res) => setRows(normalizeCountries(res.data)))
+      .then((res) => setRows(api.countries.normalizeCountries(res.data)))
       .catch((err) => {
         console.error(err);
         setError("Failed to load countries.");
@@ -60,10 +55,8 @@ export default function Countries() {
     );
   }
 
-  const totalPages = Math.ceil(rows.length / itemsPerPage);
-  const startIndex = (page - 1) * itemsPerPage;
-  const pageRows = rows.slice(startIndex, startIndex + itemsPerPage);
-
+  const headers = ["Region", "Country", "Capital", "Currency", "Language"];
+  const currencyOptions = ["USD", "EUR"];
   return (
     <S.Container>
       <S.Card>
@@ -84,60 +77,37 @@ export default function Countries() {
             Currency:
             <S.Select
               value={currency}
-              onChange={(e: { target: { value: SetStateAction<string>; }; }) => {
+              onChange={(e: { target: { value: SetStateAction<string> } }) => {
                 setCurrency(e.target.value);
                 setIndependent(false);
               }}
             >
               <option value="">All</option>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
+              {currencyOptions.map((cur) => (
+                <option key={cur} value={cur}>
+                  {cur}
+                </option>
+              ))}
             </S.Select>
           </S.FilterLabel>
         </S.TitleRow>
 
-        <S.TableWrapper>
-          <S.Table>
-            <thead>
-              <S.Tr>
-                <S.Th>Region</S.Th>
-                <S.Th>Country</S.Th>
-                <S.Th>Capital</S.Th>
-                <S.Th>Currency</S.Th>
-                <S.Th>Language</S.Th>
-              </S.Tr>
-            </thead>
-            <tbody>
-              {pageRows.map((r, i) => (
-                <S.Tr key={`${r.name}-${startIndex + i}`}>
-                  <S.Td data-label="Region">{r.region}</S.Td>
-                  <S.Td data-label="Country">{r.name}</S.Td>
-                  <S.Td data-label="Capital">{r.capital}</S.Td>
-                  <S.Td data-label="Currency">{r.currencies}</S.Td>
-                  <S.Td data-label="Language">{r.languages}</S.Td>
-                </S.Tr>
-              ))}
-            </tbody>
-          </S.Table>
-        </S.TableWrapper>
-
-        <S.PaginationContainer>
-          <S.PageButton
-            disabled={page <= 1}
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-          >
-            Previous
-          </S.PageButton>
-          <S.PageIndicator>
-            Page {page} of {totalPages}
-          </S.PageIndicator>
-          <S.PageButton
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          >
-            Next
-          </S.PageButton>
-        </S.PaginationContainer>
+        <Table
+          headers={headers}
+          rows={rows}
+          page={page}
+          itemsPerPage={itemsPerPage}
+          setPage={setPage}
+          renderRow={(r, i) => (
+            <S.Tr key={`${r.name}-${i}`}>
+              <S.Td data-label="Region">{r.region}</S.Td>
+              <S.Td data-label="Country">{r.name}</S.Td>
+              <S.Td data-label="Capital">{r.capital}</S.Td>
+              <S.Td data-label="Currency">{r.currencies}</S.Td>
+              <S.Td data-label="Language">{r.languages}</S.Td>
+            </S.Tr>
+          )}
+        />
       </S.Card>
     </S.Container>
   );
